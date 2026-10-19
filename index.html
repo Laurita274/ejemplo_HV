@@ -3,241 +3,459 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Laura Castañeda | Desarrolladora de Software</title>
-    <script type="module" src="https://cdn.jsdelivr.net/gh/zerodevx/zero-md@2/dist/zero-md.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <title>CV - Laura Marcela Castañeda Acevedo</title>
     
+    <!-- Fuentes: Inter (lectura) y Fira Code (toque de código) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Íconos ligeros vía CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <style>
+        /* ==========================================================================
+           VARIABLES CSS (Fácil personalización)
+           ========================================================================== */
         :root {
-            --bg-color: #e2e8f0;
-            --container-bg: #ffffff;
-            --sidebar-bg: #f8fafc;
-            --text-main: #334155;
-            --text-muted: #64748b;
-            --primary: #4f46e5; 
-            --accent: #0ea5e9; 
-            --highlight-bg: rgba(79, 70, 229, 0.1);
-            --shadow: rgba(0, 0, 0, 0.08);
-            --border: #e2e8f0;
+            /* Paleta Dark Mode (Pantalla) */
+            --bg-body: #0f172a;        /* Azul muy oscuro */
+            --bg-surface: #1e293b;     /* Azul pizarra oscuro */
+            --bg-surface-alt: #334155; /* Fondo alternativo para etiquetas */
+            --primary: #38bdf8;        /* Azul claro / Cyan (Acento principal) */
+            --secondary: #a78bfa;      /* Morado (Acento secundario) */
+            --text-main: #f8fafc;      /* Blanco roto para textos */
+            --text-muted: #94a3b8;     /* Gris azulado para textos secundarios */
+            --border-color: #334155;
+
+            /* Tipografías */
+            --font-main: 'Inter', sans-serif;
+            --font-code: 'Fira Code', monospace;
         }
 
-        [data-theme="dark"] {
-            --bg-color: #0f172a;
-            --container-bg: #1e293b;
-            --sidebar-bg: #111827;
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
-            --primary: #818cf8;
-            --accent: #38bdf8;
-            --highlight-bg: rgba(129, 140, 248, 0.15);
-            --shadow: rgba(0, 0, 0, 0.3);
-            --border: #334155;
+        /* ==========================================================================
+           ESTILOS BASE (Pantalla)
+           ========================================================================== */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
-
-        * { box-sizing: border-box; transition: background-color 0.3s, color 0.3s; }
 
         body {
-            font-family: 'Poppins', sans-serif;
-            background-color: var(--bg-color);
-            margin: 0;
-            padding: 40px 20px;
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            min-height: 100vh;
-        }
-
-        /* Contenedor Horizontal */
-        .resume-wrapper {
-            display: flex;
-            flex-direction: row;
-            background: var(--container-bg);
-            max-width: 1200px;
-            width: 100%;
-            border-radius: 16px;
-            box-shadow: 0 15px 35px var(--shadow);
-            overflow: hidden;
-            animation: slideUp 0.8s ease-out;
-        }
-
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Columna Izquierda: Perfil */
-        .sidebar {
-            width: 320px;
-            background-color: var(--sidebar-bg);
-            padding: 50px 30px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            border-right: 1px solid var(--border);
-        }
-
-        /* Avatar Tipográfico (Sustituto de la foto) */
-        .profile-placeholder {
-            width: 150px;
-            height: 150px;
-            background: linear-gradient(135deg, var(--primary), var(--accent));
-            color: #ffffff;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 3.5rem;
-            font-weight: 700;
-            box-shadow: 0 8px 20px var(--shadow);
-            margin-bottom: 25px;
-            letter-spacing: 2px;
-        }
-
-        .sidebar h1 {
+            background-color: var(--bg-body);
             color: var(--text-main);
-            font-size: 1.6rem;
-            margin: 0 0 5px 0;
-            text-align: center;
-        }
-
-        .sidebar h2 {
-            color: var(--accent);
-            font-size: 1rem;
-            font-weight: 400;
-            margin: 0 0 30px 0;
-            text-align: center;
-        }
-
-        .contact-links {
-            width: 100%;
+            font-family: var(--font-main);
+            line-height: 1.6;
+            padding: 2rem;
             display: flex;
-            flex-direction: column;
-            gap: 15px;
+            justify-content: center;
         }
 
-        .contact-links a, .contact-links span {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            color: var(--text-muted);
+        a {
+            color: var(--primary);
             text-decoration: none;
-            font-size: 0.95rem;
-            transition: color 0.2s;
+            transition: color 0.2s ease;
         }
 
-        .contact-links a:hover { color: var(--primary); }
-        .contact-links i { color: var(--primary); width: 20px; text-align: center; font-size: 1.2rem; }
+        a:hover {
+            color: var(--secondary);
+            text-decoration: underline;
+        }
 
-        .theme-toggle {
-            margin-top: 40px;
-            background: var(--border);
-            border: none;
-            color: var(--text-main);
-            padding: 10px 20px;
-            border-radius: 20px;
-            cursor: pointer;
-            font-weight: 600;
+        /* ==========================================================================
+           LAYOUT PRINCIPAL (CSS Grid)
+           ========================================================================== */
+        .resume-container {
+            background-color: var(--bg-surface);
+            max-width: 1100px;
+            width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            display: grid;
+            grid-template-columns: 320px 1fr; /* Columna izquierda y derecha */
+            overflow: hidden;
+        }
+
+        /* --- COLUMNA IZQUIERDA (Sidebar) --- */
+        .sidebar {
+            background-color: rgba(0, 0, 0, 0.2);
+            padding: 2.5rem 2rem;
+            border-right: 1px solid var(--border-color);
+        }
+
+        .contact-info {
+            margin-bottom: 2.5rem;
+        }
+
+        .contact-item {
             display: flex;
             align-items: center;
-            gap: 8px;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            color: var(--text-muted);
         }
-        .theme-toggle:hover { background: var(--primary); color: white; }
 
-        /* Columna Derecha: Contenido Markdown */
+        .contact-item i {
+            width: 24px;
+            color: var(--primary);
+            font-size: 1.1rem;
+        }
+
+        .section-title-side {
+            font-family: var(--font-code);
+            font-size: 1rem;
+            color: var(--text-main);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.5rem;
+        }
+
+        /* Etiquetas de Habilidades (Píldoras) */
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .tag {
+            background-color: var(--bg-surface-alt);
+            color: var(--primary);
+            font-family: var(--font-code);
+            font-size: 0.8rem;
+            padding: 0.3rem 0.8rem;
+            border-radius: 6px;
+            border: 1px solid rgba(56, 189, 248, 0.2);
+        }
+
+        .languages-list li {
+            list-style: none;
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        /* --- COLUMNA DERECHA (Main Content) --- */
         .main-content {
-            flex: 1;
-            padding: 50px 60px;
-            overflow-y: auto;
+            padding: 3rem;
         }
 
-        /* Responsivo (Móviles) */
-        @media (max-width: 900px) {
-            .resume-wrapper { flex-direction: column; }
-            .sidebar { width: 100%; border-right: none; border-bottom: 1px solid var(--border); }
-            .main-content { padding: 30px 20px; }
+        .header {
+            margin-bottom: 2.5rem;
+        }
+
+        .header h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 0.5rem;
+        }
+
+        .header h2 {
+            font-family: var(--font-code);
+            color: var(--primary);
+            font-size: 1.2rem;
+            font-weight: 400;
+        }
+
+        .header h2::before {
+            content: "> "; /* Detalle terminal */
+            color: var(--secondary);
+        }
+
+        .section-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--secondary);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .section-title::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background-color: var(--border-color);
+            margin-left: 1rem;
+        }
+
+        .summary {
+            color: var(--text-muted);
+            font-size: 1rem;
+            margin-bottom: 2.5rem;
+        }
+
+        /* Ítems de Experiencia y Proyectos */
+        .timeline-item {
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 0.3rem;
+        }
+
+        .item-title {
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        .item-date {
+            font-family: var(--font-code);
+            font-size: 0.85rem;
+            color: var(--primary);
+        }
+
+        .item-subtitle {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            font-style: italic;
+            margin-bottom: 0.8rem;
+        }
+
+        .item-desc {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin-bottom: 0.8rem;
+        }
+
+        .item-desc ul {
+            padding-left: 1.2rem;
+            margin-top: 0.5rem;
+        }
+
+        .item-desc li {
+            margin-bottom: 0.4rem;
+        }
+
+        .item-tech {
+            font-family: var(--font-code);
+            font-size: 0.8rem;
+            color: var(--secondary);
+        }
+
+        /* ==========================================================================
+           RESPONSIVE (Dispositivos Móviles)
+           ========================================================================== */
+        @media (max-width: 850px) {
+            .resume-container {
+                grid-template-columns: 1fr;
+            }
+            body {
+                padding: 1rem;
+            }
+            .sidebar {
+                border-right: none;
+                border-bottom: 1px solid var(--border-color);
+            }
+            .item-header {
+                flex-direction: column;
+            }
+            .item-date {
+                margin-top: 0.2rem;
+            }
+        }
+
+        /* ==========================================================================
+           ESTILOS PARA IMPRESIÓN / EXPORTAR A PDF (@media print)
+           ========================================================================== */
+        @media print {
+            :root {
+                /* Invertir colores a blanco y negro para papel */
+                --bg-body: #ffffff;
+                --bg-surface: #ffffff;
+                --bg-surface-alt: #f1f5f9;
+                --primary: #0284c7;        /* Azul oscuro para papel */
+                --secondary: #4f46e5;      /* Índigo oscuro para papel */
+                --text-main: #0f172a;      /* Negro / Gris muy oscuro */
+                --text-muted: #334155;     /* Gris oscuro */
+                --border-color: #cbd5e1;
+            }
+
+            body {
+                padding: 0;
+                background-color: white;
+            }
+
+            .resume-container {
+                box-shadow: none;
+                max-width: 100%;
+                border-radius: 0;
+            }
+
+            .sidebar {
+                background-color: #f8fafc; /* Gris muy claro para contraste leve */
+            }
+
+            .tag {
+                border: 1px solid #cbd5e1;
+                color: #0f172a;
+            }
+
+            /* Evitar que los elementos se corten a la mitad entre páginas */
+            .timeline-item, .section-title {
+                page-break-inside: avoid;
+            }
+            
+            /* Ocultar enlaces (URLs crudas) al imprimir si no son visualmente estéticos */
+            a {
+                text-decoration: none !important;
+            }
         }
     </style>
 </head>
 <body>
 
-    <div class="resume-wrapper">
-        <!-- Columna Izquierda -->
+    <div class="resume-container">
+        
+        <!-- COLUMNA IZQUIERDA -->
         <aside class="sidebar">
-            <!-- Avatar tipográfico sin necesidad de imagen -->
-            <div class="profile-placeholder">LC</div>
             
-            <h1>Laura Castañeda</h1>
-            <h2>Desarrolladora de Software</h2>
-            
-            <div class="contact-links">
-                <span><i class="fas fa-map-marker-alt"></i> Medellín, Colombia</span>
-                <a href="mailto:tu-correo@gmail.com"><i class="fas fa-envelope"></i> tu-correo@gmail.com</a>
-                <a href="https://linkedin.com/in/tu-perfil" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
-                <a href="https://github.com/Laurita274" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+            <!-- CONTACTO -->
+            <div class="contact-info">
+                <!-- REEMPLAZA TUS DATOS AQUÍ -->
+                <div class="contact-item">
+                    <i class="fa-solid fa-envelope"></i>
+                    <span>correo.ejemplo@gmail.com</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <span>Medellín, Antioquia</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fa-brands fa-github"></i>
+                    <a href="https://github.com/Laurita274" target="_blank">github.com/Laurita274</a>
+                </div>
+                <div class="contact-item">
+                    <i class="fa-brands fa-linkedin"></i>
+                    <a href="#" target="_blank">linkedin.com/in/tu-perfil</a>
+                </div>
             </div>
 
-            <button class="theme-toggle" id="themeBtn">
-                <i class="fas fa-moon"></i> Modo Oscuro
-            </button>
+            <!-- HABILIDADES TÉCNICAS -->
+            <h3 class="section-title-side">Stack Tecnológico</h3>
+            
+            <div class="contact-item" style="color: var(--text-main); font-weight:600; margin-bottom: 0.5rem;">Lenguajes & Backend</div>
+            <div class="tags-container">
+                <span class="tag">Python</span>
+                <span class="tag">PHP</span>
+                <span class="tag">SQL</span>
+                <span class="tag">MySQL</span>
+                <span class="tag">PostgreSQL</span>
+            </div>
+
+            <div class="contact-item" style="color: var(--text-main); font-weight:600; margin-bottom: 0.5rem;">Frontend</div>
+            <div class="tags-container">
+                <span class="tag">HTML5</span>
+                <span class="tag">CSS3</span>
+                <span class="tag">Bootstrap</span>
+            </div>
+
+            <div class="contact-item" style="color: var(--text-main); font-weight:600; margin-bottom: 0.5rem;">Herramientas & Entornos</div>
+            <div class="tags-container">
+                <span class="tag">Git & GitHub</span>
+                <span class="tag">PlantUML</span>
+                <span class="tag">PSeInt</span>
+            </div>
+
+            <!-- IDIOMAS -->
+            <h3 class="section-title-side" style="margin-top: 2rem;">Idiomas</h3>
+            <ul class="languages-list">
+                <li><span>Español</span> <span>Nativo</span></li>
+                <li><span>Inglés</span> <span>Intermedio (B1)</span></li>
+            </ul>
+
         </aside>
 
-        <!-- Columna Derecha -->
+        <!-- COLUMNA DERECHA -->
         <main class="main-content">
-            <zero-md src="cv.md">
-                <template>
-                    <style>
-                        :host { font-family: 'Poppins', sans-serif; color: var(--text-main); }
-                        h2, h3 { color: var(--accent); border-bottom: 2px solid var(--border); padding-bottom: 5px; margin-top: 1.5em; }
-                        h2:first-child { margin-top: 0; }
-                        a { color: var(--primary); text-decoration: none; font-weight: 600; }
-                        a:hover { text-decoration: underline; }
-                        p, li { line-height: 1.7; color: var(--text-muted); }
-                        
-                        /* Resaltado de Palabras Clave (Etiquetas) que reemplazan a las insignias */
-                        strong {
-                            color: var(--primary);
-                            background-color: var(--highlight-bg);
-                            padding: 4px 10px;
-                            border-radius: 6px;
-                            font-weight: 600;
-                            display: inline-block;
-                            margin: 3px 2px;
-                            border: 1px solid rgba(79, 70, 229, 0.2);
-                        }
+            
+            <!-- ENCABEZADO -->
+            <header class="header">
+                <h1>Laura Marcela Castañeda Acevedo</h1>
+                <h2>Desarrolladora de Software Full-Stack</h2>
+            </header>
 
-                        table { width: 100%; border-collapse: collapse; margin-top: 15px; }
-                        th, td { padding: 15px; text-align: left; border-bottom: 1px solid var(--border); color: var(--text-muted); vertical-align: top;}
-                        th { color: var(--primary); font-weight: 600; width: 25%; }
-                    </style>
-                </template>
-            </zero-md>
+            <!-- PERFIL -->
+            <section class="summary">
+                <p>Desarrolladora en formación enfocada en la lógica algorítmica y la arquitectura de bases de datos relacionales. Experiencia en la creación de esquemas relacionales, procedimientos almacenados y triggers en SQL, así como en el diseño de interfaces web eficientes. Busco aportar conocimientos analíticos para construir plataformas digitales escalables y enfocadas en la experiencia del usuario.</p>
+            </section>
+
+            <!-- PROYECTOS DESTACADOS -->
+            <h3 class="section-title"><i class="fa-solid fa-code" style="margin-right: 10px;"></i> Proyectos Destacados</h3>
+            
+            <div class="timeline-item">
+                <div class="item-header">
+                    <div class="item-title">OneStyle - Plataforma E-commerce</div>
+                    <div class="item-date">2026</div>
+                </div>
+                <div class="item-subtitle">Desarrollo Web Full-Stack</div>
+                <div class="item-desc">
+                    <p>Desarrollo de catálogo digital para comercio de ropa femenina con panel administrativo funcional.</p>
+                    <ul>
+                        <li>Construcción de matrices de requerimientos e historias de usuario.</li>
+                        <li>Modelado lógico de base de datos relacional y diagramación conceptual arquitectónica.</li>
+                    </ul>
+                </div>
+                <div class="item-tech">Stack: PHP | SQL | PlantUML</div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="item-header">
+                    <div class="item-title">FixNow - Marketplace de Reparaciones</div>
+                    <div class="item-date">2026</div>
+                </div>
+                <div class="item-subtitle">Diseño y Estructuración Web</div>
+                <div class="item-desc">
+                    <p>Plataforma para conectar proveedores de servicios técnicos con usuarios en la ciudad de Medellín.</p>
+                    <ul>
+                        <li>Diseño de arquitectura de negocio y análisis DOFA del entorno local.</li>
+                        <li>Desarrollo frontend de las interfaces de registro y conexión.</li>
+                    </ul>
+                </div>
+                <div class="item-tech">Stack: HTML/CSS | Bootstrap | Metodologías de Análisis</div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="item-header">
+                    <div class="item-title">Sistema Institucional de Reserva de Turnos</div>
+                    <div class="item-date">2026</div>
+                </div>
+                <div class="item-subtitle">Automatización de Recursos</div>
+                <div class="item-desc">
+                    <p>Aplicación web diseñada para automatizar el uso de recursos compartidos (microondas) para reducir tiempos de espera en el entorno educativo.</p>
+                </div>
+                <div class="item-tech">Stack: Python | SQL | PSeInt</div>
+            </div>
+
+            <!-- EDUCACIÓN -->
+            <h3 class="section-title"><i class="fa-solid fa-graduation-cap" style="margin-right: 10px;"></i> Formación Académica</h3>
+            
+            <div class="timeline-item" style="margin-bottom: 0;">
+                <div class="item-header">
+                    <div class="item-title">Tecnología en Análisis y Desarrollo de Software (ADSO)</div>
+                    <div class="item-date">En curso</div>
+                </div>
+                <div class="item-subtitle">SENA - Centro Textil y de Gestión Industrial (CTGI)</div>
+                <div class="item-desc">
+                    <ul>
+                        <li>Desarrollo de algoritmos lógicos estructurados y diagramación UML/BPMN.</li>
+                        <li>Normalización y optimización de bases de datos relacionales mediante procedimientos almacenados.</li>
+                    </ul>
+                </div>
+            </div>
+
         </main>
     </div>
 
-    <script>
-        const themeBtn = document.getElementById('themeBtn');
-        const icon = themeBtn.querySelector('i');
-        const currentTheme = localStorage.getItem('theme') || 'light';
-
-        if (currentTheme === 'dark') {
-            document.documentElement.setAttribute('data-theme', 'dark');
-            icon.classList.replace('fa-moon', 'fa-sun');
-            themeBtn.innerHTML = '<i class="fas fa-sun"></i> Modo Claro';
-        }
-
-        themeBtn.addEventListener('click', () => {
-            let theme = document.documentElement.getAttribute('data-theme');
-            if (theme === 'dark') {
-                document.documentElement.removeAttribute('data-theme');
-                localStorage.setItem('theme', 'light');
-                themeBtn.innerHTML = '<i class="fas fa-moon"></i> Modo Oscuro';
-            } else {
-                document.documentElement.setAttribute('data-theme', 'dark');
-                localStorage.setItem('theme', 'dark');
-                themeBtn.innerHTML = '<i class="fas fa-sun"></i> Modo Claro';
-            }
-        });
-    </script>
 </body>
 </html>
