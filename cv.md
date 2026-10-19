@@ -3,10 +3,6 @@
 [Tu Correo Electrónico] | [URL de tu LinkedIn] | https://github.com/Laurita274 | Medellín, Colombia
 ***
 
-<div align="center">
-  <img src="assets/banner.png" alt="Banner de Desarrollo de Software" width="100%">
-</div>
-
 <h1 align="center">💻 Desarrollo de Software & Bases de Datos</h1>
 
 <h3 align="center">
