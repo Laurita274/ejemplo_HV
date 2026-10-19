@@ -48,7 +48,7 @@
             min-height: 100vh;
         }
 
-        /* Contenedor Horizontal (Dos columnas) */
+        /* Contenedor Horizontal */
         .resume-wrapper {
             display: flex;
             flex-direction: row;
@@ -77,14 +77,21 @@
             border-right: 1px solid var(--border);
         }
 
-        .profile-img {
-            width: 180px;
-            height: 180px;
+        /* Avatar Tipográfico (Sustituto de la foto) */
+        .profile-placeholder {
+            width: 150px;
+            height: 150px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: #ffffff;
             border-radius: 50%;
-            object-fit: cover;
-            border: 4px solid var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3.5rem;
+            font-weight: 700;
             box-shadow: 0 8px 20px var(--shadow);
             margin-bottom: 25px;
+            letter-spacing: 2px;
         }
 
         .sidebar h1 {
@@ -157,10 +164,80 @@
     <div class="resume-wrapper">
         <!-- Columna Izquierda -->
         <aside class="sidebar">
-            <!-- Asegúrate de tener tu foto en la carpeta assets -->
-            <img src="assets/perfil.jpg" alt="Laura Castañeda" class="profile-img">
+            <!-- Avatar tipográfico sin necesidad de imagen -->
+            <div class="profile-placeholder">LC</div>
+            
             <h1>Laura Castañeda</h1>
             <h2>Desarrolladora de Software</h2>
             
             <div class="contact-links">
                 <span><i class="fas fa-map-marker-alt"></i> Medellín, Colombia</span>
+                <a href="mailto:tu-correo@gmail.com"><i class="fas fa-envelope"></i> tu-correo@gmail.com</a>
+                <a href="https://linkedin.com/in/tu-perfil" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                <a href="https://github.com/Laurita274" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+            </div>
+
+            <button class="theme-toggle" id="themeBtn">
+                <i class="fas fa-moon"></i> Modo Oscuro
+            </button>
+        </aside>
+
+        <!-- Columna Derecha -->
+        <main class="main-content">
+            <zero-md src="cv.md">
+                <template>
+                    <style>
+                        :host { font-family: 'Poppins', sans-serif; color: var(--text-main); }
+                        h2, h3 { color: var(--accent); border-bottom: 2px solid var(--border); padding-bottom: 5px; margin-top: 1.5em; }
+                        h2:first-child { margin-top: 0; }
+                        a { color: var(--primary); text-decoration: none; font-weight: 600; }
+                        a:hover { text-decoration: underline; }
+                        p, li { line-height: 1.7; color: var(--text-muted); }
+                        
+                        /* Resaltado de Palabras Clave (Etiquetas) que reemplazan a las insignias */
+                        strong {
+                            color: var(--primary);
+                            background-color: var(--highlight-bg);
+                            padding: 4px 10px;
+                            border-radius: 6px;
+                            font-weight: 600;
+                            display: inline-block;
+                            margin: 3px 2px;
+                            border: 1px solid rgba(79, 70, 229, 0.2);
+                        }
+
+                        table { width: 100%; border-collapse: collapse; margin-top: 15px; }
+                        th, td { padding: 15px; text-align: left; border-bottom: 1px solid var(--border); color: var(--text-muted); vertical-align: top;}
+                        th { color: var(--primary); font-weight: 600; width: 25%; }
+                    </style>
+                </template>
+            </zero-md>
+        </main>
+    </div>
+
+    <script>
+        const themeBtn = document.getElementById('themeBtn');
+        const icon = themeBtn.querySelector('i');
+        const currentTheme = localStorage.getItem('theme') || 'light';
+
+        if (currentTheme === 'dark') {
+            document.documentElement.setAttribute('data-theme', 'dark');
+            icon.classList.replace('fa-moon', 'fa-sun');
+            themeBtn.innerHTML = '<i class="fas fa-sun"></i> Modo Claro';
+        }
+
+        themeBtn.addEventListener('click', () => {
+            let theme = document.documentElement.getAttribute('data-theme');
+            if (theme === 'dark') {
+                document.documentElement.removeAttribute('data-theme');
+                localStorage.setItem('theme', 'light');
+                themeBtn.innerHTML = '<i class="fas fa-moon"></i> Modo Oscuro';
+            } else {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                localStorage.setItem('theme', 'dark');
+                themeBtn.innerHTML = '<i class="fas fa-sun"></i> Modo Claro';
+            }
+        });
+    </script>
+</body>
+</html>
