@@ -45,7 +45,6 @@
             --shadow-color: rgba(0,0,0,0.1);
         }
 
-        /* Transiciones globales para el cambio de tema */
         * { box-sizing: border-box; margin: 0; padding: 0; transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease; }
 
         body {
@@ -54,7 +53,6 @@
             font-family: var(--font-main);
             line-height: 1.6;
             padding: 2rem;
-            /* Flex-start es crucial para que funcione el 'sticky' de la columna izquierda */
             display: flex;
             justify-content: center;
             align-items: flex-start; 
@@ -74,7 +72,6 @@
             box-shadow: 0 20px 40px var(--shadow-color);
             display: grid;
             grid-template-columns: 320px 1fr;
-            /* IMPORTANTE: No usar overflow:hidden aquí, o el 'sticky' se rompe */
         }
 
         /* --- COLUMNA IZQUIERDA ESTÁTICA (Sticky Sidebar) --- */
@@ -85,13 +82,10 @@
             border-top-left-radius: 16px;
             border-bottom-left-radius: 16px;
             
-            /* Lógica Estática / Sticky */
             position: sticky;
             top: 2rem;
-            height: calc(100vh - 4rem); /* Ocupa el alto de la pantalla menos los márgenes */
-            overflow-y: auto; /* Permite scroll interno solo si la pantalla es muy pequeña */
-            
-            /* Ocultar la barra de scroll de la columna izquierda para mejor diseño */
+            height: calc(100vh - 4rem); 
+            overflow-y: auto; 
             scrollbar-width: none; 
         }
         .sidebar::-webkit-scrollbar { display: none; }
@@ -113,8 +107,6 @@
             outline: 3px solid var(--primary);
             box-shadow: 0 0 20px rgba(56, 189, 248, 0.3);
             background-color: var(--bg-surface-alt);
-            
-            /* Interactividad de la imagen */
             transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
             cursor: pointer;
         }
@@ -125,11 +117,16 @@
             outline-color: var(--secondary);
         }
 
-        /* Botón Modo Oscuro/Claro */
-        .theme-toggle-btn {
+        /* Botones de Acción (Tema y Descarga) */
+        .sidebar-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 2rem;
+        }
+
+        .action-btn {
             width: 100%;
-            background-color: var(--bg-surface-alt);
-            color: var(--text-main);
             border: 1px solid var(--border-color);
             padding: 10px;
             border-radius: 8px;
@@ -140,12 +137,31 @@
             justify-content: center;
             align-items: center;
             gap: 10px;
-            margin-bottom: 2rem;
             transition: all 0.2s ease;
         }
-        .theme-toggle-btn:hover {
+
+        .theme-btn {
+            background-color: var(--bg-surface-alt);
+            color: var(--text-main);
+        }
+
+        .theme-btn:hover {
             background-color: var(--primary);
             color: #fff;
+            transform: translateY(-2px);
+        }
+
+        .download-btn {
+            background-color: var(--primary);
+            color: #fff;
+            border-color: var(--primary);
+            box-shadow: 0 4px 10px rgba(56, 189, 248, 0.3);
+        }
+
+        .download-btn:hover {
+            background-color: var(--secondary);
+            border-color: var(--secondary);
+            box-shadow: 0 6px 15px rgba(167, 139, 250, 0.5);
             transform: translateY(-2px);
         }
 
@@ -214,7 +230,7 @@
         .timeline-item:hover {
             background-color: var(--bg-surface-alt);
             border-color: var(--border-color);
-            transform: translateX(10px); /* Pequeño deslizamiento a la derecha */
+            transform: translateX(10px); 
             box-shadow: -5px 5px 15px var(--shadow-color);
         }
 
@@ -234,7 +250,7 @@
             .resume-container { grid-template-columns: 1fr; }
             body { padding: 1rem; }
             .sidebar { 
-                position: relative; /* Quita el sticky en móviles para no tapar la pantalla */
+                position: relative; 
                 top: 0; 
                 height: auto; 
                 border-right: none; 
@@ -244,15 +260,18 @@
             .main-content { padding: 2rem; }
             .item-header { flex-direction: column; }
             .item-date { margin-top: 0.5rem; display: inline-block; }
-            .timeline-item:hover { transform: translateY(-5px); } /* En móvil sube en lugar de deslizar a la derecha */
+            .timeline-item:hover { transform: translateY(-5px); } 
         }
 
         /* ==========================================================================
-           MODO IMPRESIÓN / PDF
+           MODO IMPRESIÓN / DESCARGA PDF
            ========================================================================== */
         @media print {
             body { background: white !important; color: black !important; padding: 0; display: block; }
-            .theme-toggle-btn { display: none; } /* Ocultar el botón al imprimir */
+            
+            /* Ocultar los botones al momento de exportar a PDF */
+            .sidebar-actions { display: none !important; } 
+            
             .resume-container { box-shadow: none; border-radius: 0; max-width: 100%; display: grid; grid-template-columns: 280px 1fr; }
             .sidebar { position: relative; height: auto; border-right: 1px solid #ddd; background: #f9f9f9; }
             .profile-pic { border-color: #0284c7; outline: none; box-shadow: none; }
@@ -276,17 +295,19 @@
             
             <!-- FOTO DE PERFIL INTERACTIVA -->
             <div class="profile-container" title="¡Hola! Soy Laura">
-                <!-- 
-                  Mientras no tengas tu foto real, uso un avatar dinámico de UI-Avatars que genera tus iniciales.
-                  Para usar tu foto: Cambia el src a "perfil.jpg" 
-                -->
                 <img src="https://ui-avatars.com/api/?name=Laura+Castañeda&background=38bdf8&color=0f172a&size=300&font-size=0.33" alt="Foto de perfil de Laura Castañeda" class="profile-pic">
             </div>
 
-            <!-- BOTÓN INTERACTIVO TEMA -->
-            <button class="theme-toggle-btn" id="themeBtn">
-                <i class="fa-solid fa-sun"></i> Modo Claro
-            </button>
+            <!-- BOTONES DE ACCIÓN (Tema y Descarga) -->
+            <div class="sidebar-actions">
+                <button class="action-btn theme-btn" id="themeBtn">
+                    <i class="fa-solid fa-sun"></i> Modo Claro
+                </button>
+                
+                <button class="action-btn download-btn" id="downloadBtn">
+                    <i class="fa-solid fa-file-pdf"></i> Descargar CV
+                </button>
+            </div>
 
             <!-- CONTACTO -->
             <div class="contact-info">
@@ -424,12 +445,12 @@
         </main>
     </div>
 
-    <!-- Script para Modo Oscuro/Claro -->
+    <!-- Scripts de Interactividad y Descarga -->
     <script>
+        // 1. Lógica del Modo Claro/Oscuro
         const themeBtn = document.getElementById('themeBtn');
         const rootElement = document.documentElement;
         
-        // Verifica si el usuario ya tenía preferencia guardada
         const savedTheme = localStorage.getItem('cv-theme');
         if (savedTheme === 'light') {
             rootElement.setAttribute('data-theme', 'light');
@@ -440,16 +461,22 @@
             const currentTheme = rootElement.getAttribute('data-theme');
             
             if (currentTheme === 'light') {
-                // Cambiar a Oscuro
                 rootElement.removeAttribute('data-theme');
                 localStorage.setItem('cv-theme', 'dark');
                 themeBtn.innerHTML = '<i class="fa-solid fa-sun"></i> Modo Claro';
             } else {
-                // Cambiar a Claro
                 rootElement.setAttribute('data-theme', 'light');
                 localStorage.setItem('cv-theme', 'light');
                 themeBtn.innerHTML = '<i class="fa-solid fa-moon"></i> Modo Oscuro';
             }
+        });
+
+        // 2. Lógica del Botón de Descarga
+        const downloadBtn = document.getElementById('downloadBtn');
+        
+        downloadBtn.addEventListener('click', () => {
+            // Invoca la ventana de impresión nativa del navegador
+            window.print();
         });
     </script>
 </body>
