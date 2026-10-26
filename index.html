@@ -8,7 +8,7 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
     
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -19,15 +19,17 @@
 
     <style>
         /* =========================================
-           VARIABLES Y CONFIGURACIÓN BASE
+           VARIABLES: ESTÉTICA CLARA Y PASTEL
         ========================================= */
         :root {
-            --bg-dark: #0f172a;
-            --bg-card: #1e293b;
-            --primary-color: #38bdf8; /* Cyan */
-            --secondary-color: #818cf8; /* Indigo */
-            --text-light: #f8fafc;
-            --text-muted: #94a3b8;
+            --bg-main: #f8fafc;        /* Fondo general muy claro */
+            --bg-card: #ffffff;        /* Fondo blanco puro para tarjetas */
+            --primary-color: #6366f1;  /* Indigo suave (Acento principal) */
+            --secondary-color: #f472b6;/* Rosa pastel (Acento secundario) */
+            --text-main: #1e293b;      /* Texto oscuro para máxima legibilidad */
+            --text-muted: #475569;     /* Texto gris medio para descripciones */
+            --border-color: #e2e8f0;   /* Bordes sutiles */
+            --pastel-blue: #e0f2fe;    /* Detalles pastel */
             --font-main: 'Inter', sans-serif;
             --font-code: 'Fira Code', monospace;
         }
@@ -36,12 +38,17 @@
         
         body {
             font-family: var(--font-main);
-            background-color: var(--bg-dark);
-            color: var(--text-light);
+            background-color: var(--bg-main);
+            /* Gradiente pastel sutil de fondo para un toque más estético */
+            background-image: radial-gradient(at 0% 0%, rgba(224, 242, 254, 0.5) 0px, transparent 50%),
+                              radial-gradient(at 100% 0%, rgba(243, 232, 255, 0.5) 0px, transparent 50%);
+            background-attachment: fixed;
+            color: var(--text-main);
             overflow-x: hidden;
         }
 
-        h1, h2, h3, h4, h5, h6 { font-weight: 700; }
+        h1, h2, h3, h4, h5, h6 { font-weight: 700; color: var(--text-main); }
+        p { color: var(--text-muted); }
         .text-primary-custom { color: var(--primary-color) !important; }
         .font-code { font-family: var(--font-code); }
 
@@ -50,32 +57,33 @@
         ========================================= */
         .navbar {
             background-color: transparent;
-            transition: background-color 0.4s ease, box-shadow 0.4s ease;
+            transition: all 0.4s ease;
             padding: 1rem 0;
         }
         .navbar.scrolled {
-            background-color: rgba(15, 23, 42, 0.95);
+            background-color: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
-            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
             padding: 0.5rem 0;
         }
-        .navbar-dark .navbar-nav .nav-link {
-            color: var(--text-light);
-            font-weight: 600;
+        .navbar-light .navbar-nav .nav-link {
+            color: var(--text-main);
+            font-weight: 500;
             text-transform: uppercase;
             font-size: 0.85rem;
             letter-spacing: 1px;
             margin: 0 10px;
             transition: color 0.3s;
         }
-        .navbar-dark .navbar-nav .nav-link:hover,
-        .navbar-dark .navbar-nav .nav-link.active {
+        .navbar-light .navbar-nav .nav-link:hover,
+        .navbar-light .navbar-nav .nav-link.active {
             color: var(--primary-color);
         }
+        .navbar-brand { color: var(--primary-color) !important; }
         
         /* Botón de Descarga */
         .btn-download {
-            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            background-color: var(--primary-color);
             color: #fff;
             border: none;
             font-weight: 600;
@@ -85,7 +93,7 @@
         }
         .btn-download:hover {
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(56, 189, 248, 0.4);
+            box-shadow: 0 8px 20px rgba(99, 102, 241, 0.3);
             color: #fff;
         }
 
@@ -108,18 +116,22 @@
             height: 250px;
             object-fit: cover;
             border-radius: 50%;
-            border: 4px solid var(--bg-dark);
-            box-shadow: 0 0 0 4px var(--primary-color), 0 10px 30px rgba(0,0,0,0.5);
+            border: 5px solid var(--bg-card);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
             transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
         .profile-img:hover { transform: scale(1.05) rotate(2deg); }
         
-        .hero-title { font-size: 3.5rem; line-height: 1.2; }
+        .hero-title { font-size: 3.5rem; line-height: 1.2; color: var(--text-main); }
         .hero-subtitle {
             font-family: var(--font-code);
             color: var(--primary-color);
             font-size: 1.2rem;
             margin-bottom: 2rem;
+            background-color: var(--pastel-blue);
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 8px;
         }
         .social-icons a {
             display: inline-flex;
@@ -129,27 +141,33 @@
             height: 45px;
             border-radius: 50%;
             background-color: var(--bg-card);
-            color: var(--text-light);
+            color: var(--text-main);
             font-size: 1.2rem;
             margin-right: 15px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
             transition: all 0.3s ease;
             text-decoration: none;
+            border: 1px solid var(--border-color);
         }
         .social-icons a:hover {
             background-color: var(--primary-color);
-            color: var(--bg-dark);
+            color: #fff;
             transform: translateY(-5px);
+            border-color: var(--primary-color);
         }
 
         /* =========================================
            SECCIONES GENERALES
         ========================================= */
-        section { padding: 100px 0; }
+        section { padding: 90px 0; }
+        .bg-white-section { background-color: var(--bg-card); }
+        
         .section-title {
             position: relative;
             margin-bottom: 3rem;
             padding-bottom: 1rem;
             display: inline-block;
+            color: var(--text-main);
         }
         .section-title::after {
             content: '';
@@ -163,107 +181,176 @@
         }
 
         /* =========================================
-           HABILIDADES TÉCNICAS (BARRAS DE PROGRESO)
+           HABILIDADES TÉCNICAS
         ========================================= */
         .skill-box {
             background-color: var(--bg-card);
             padding: 25px;
             border-radius: 12px;
             margin-bottom: 20px;
-            border: 1px solid rgba(255,255,255,0.05);
-            transition: transform 0.3s;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+            border: 1px solid var(--border-color);
+            transition: transform 0.3s, box-shadow 0.3s;
         }
-        .skill-box:hover { transform: translateY(-5px); }
+        .skill-box:hover { 
+            transform: translateY(-5px); 
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+        }
         .skill-name {
             display: flex;
             align-items: center;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
             font-size: 1.1rem;
             font-weight: 600;
+            color: var(--text-main);
         }
-        .skill-name i { font-size: 1.5rem; margin-right: 15px; color: var(--primary-color); width: 30px; text-align: center; }
-        .progress { height: 10px; background-color: #334155; border-radius: 10px; overflow: visible; }
+        .skill-name i { font-size: 1.6rem; margin-right: 15px; color: var(--primary-color); width: 30px; text-align: center; }
+        
+        /* Barra de progreso clara */
+        .progress { 
+            height: 12px; 
+            background-color: #f1f5f9; 
+            border-radius: 10px; 
+            overflow: visible; 
+            border: 1px solid #e2e8f0;
+        }
         .progress-bar {
-            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            background: linear-gradient(90deg, var(--primary-color), #818cf8);
             border-radius: 10px;
-            width: 0; /* Inicia en 0 para la animación con JS */
+            width: 0; 
             transition: width 1.5s ease-in-out;
             position: relative;
         }
-        /* Porcentaje encima de la barra */
         .progress-bar::after {
             content: attr(data-percent);
             position: absolute;
             right: 0;
-            top: -25px;
-            font-size: 0.8rem;
+            top: -28px;
+            font-size: 0.85rem;
             font-weight: 600;
-            color: var(--text-light);
+            color: var(--primary-color);
         }
 
         /* =========================================
            PROYECTOS (FILTROS Y TARJETAS)
         ========================================= */
-        .filter-btns { margin-bottom: 2rem; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
+        .filter-btns { margin-bottom: 2.5rem; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
         .filter-btn {
-            background-color: transparent;
-            border: 1px solid var(--primary-color);
-            color: var(--text-light);
-            padding: 8px 20px;
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            color: var(--text-muted);
+            padding: 8px 22px;
             border-radius: 30px;
-            font-weight: 600;
-            font-size: 0.9rem;
+            font-weight: 500;
+            font-size: 0.95rem;
             cursor: pointer;
             transition: all 0.3s;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
         }
-        .filter-btn:hover, .filter-btn.active { background-color: var(--primary-color); color: var(--bg-dark); }
+        .filter-btn:hover, .filter-btn.active { 
+            background-color: var(--primary-color); 
+            color: #fff; 
+            border-color: var(--primary-color);
+        }
         
         .project-card {
             background-color: var(--bg-card);
-            border-radius: 12px;
-            padding: 30px;
+            border-radius: 16px;
+            padding: 35px 30px;
             height: 100%;
-            border: 1px solid rgba(255,255,255,0.05);
+            border: 1px solid var(--border-color);
             transition: transform 0.3s, box-shadow 0.3s;
             position: relative;
             overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
         }
         .project-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.4);
-            border-color: rgba(56, 189, 248, 0.3);
+            transform: translateY(-8px);
+            box-shadow: 0 20px 30px rgba(0,0,0,0.08);
+            border-color: #cbd5e1;
         }
-        .project-icon { font-size: 2.5rem; color: var(--primary-color); margin-bottom: 1.5rem; }
+        .project-icon { 
+            font-size: 2.5rem; 
+            color: var(--primary-color); 
+            margin-bottom: 1.5rem; 
+            background-color: var(--pastel-blue);
+            width: 70px;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 16px;
+        }
+        .project-card h4 { margin-bottom: 15px; color: var(--text-main); }
+        .project-card p { font-size: 0.95rem; }
         .project-tags span {
             font-family: var(--font-code);
             font-size: 0.75rem;
-            background-color: rgba(56, 189, 248, 0.1);
-            color: var(--primary-color);
-            padding: 4px 10px;
-            border-radius: 4px;
-            margin-right: 5px;
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            border: 1px solid var(--border-color);
+            padding: 5px 10px;
+            border-radius: 6px;
+            margin-right: 6px;
             display: inline-block;
-            margin-bottom: 5px;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        .btn-outline-info {
+            color: var(--primary-color);
+            border-color: var(--primary-color);
+            font-weight: 500;
+        }
+        .btn-outline-info:hover {
+            background-color: var(--primary-color);
+            color: #fff;
+            border-color: var(--primary-color);
         }
 
         /* =========================================
-           EDUCACIÓN Y EXPERIENCIA (TIMELINE)
+           EDUCACIÓN (TIMELINE CLARA)
         ========================================= */
-        .timeline { border-left: 2px solid var(--primary-color); padding-left: 30px; position: relative; }
+        .timeline { border-left: 3px solid var(--pastel-blue); padding-left: 30px; position: relative; margin-left: 15px;}
         .timeline-item { margin-bottom: 40px; position: relative; }
         .timeline-item::before {
             content: '';
             position: absolute;
-            left: -41px;
+            left: -42px;
             top: 0;
-            width: 20px;
-            height: 20px;
-            background-color: var(--bg-dark);
+            width: 22px;
+            height: 22px;
+            background-color: var(--bg-card);
             border: 4px solid var(--primary-color);
             border-radius: 50%;
+            box-shadow: 0 0 0 4px var(--pastel-blue);
         }
-        .timeline-date { font-family: var(--font-code); color: var(--primary-color); font-size: 0.9rem; margin-bottom: 5px; display: block; }
+        .timeline-date { 
+            font-family: var(--font-code); 
+            color: var(--text-main); 
+            font-size: 0.85rem; 
+            margin-bottom: 8px; 
+            display: inline-block; 
+            background-color: #f1f5f9;
+            padding: 4px 10px;
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
+        }
         
+        /* Contenedor de contacto lateral */
+        .contact-panel {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.04);
+        }
+        .contact-panel li {
+            border-bottom: 1px solid var(--bg-main);
+            padding-bottom: 10px;
+            color: var(--text-main);
+            font-weight: 500;
+        }
+        .contact-panel li:last-child { border-bottom: none; padding-bottom: 0; }
+
         /* =========================================
            ANIMACIONES DE SCROLL (JS)
         ========================================= */
@@ -277,21 +364,18 @@
             body { background-color: #fff; color: #000; padding: 0; }
             .navbar, .btn-download, .filter-btns { display: none !important; }
             section { padding: 20px 0; page-break-inside: avoid; }
-            .bg-dark, .bg-card, .skill-box, .project-card { background-color: #fff !important; border: 1px solid #ccc !important; color: #000 !important; box-shadow: none !important;}
-            .text-light { color: #000 !important; }
+            .bg-white-section, .skill-box, .project-card, .contact-panel { background-color: #fff !important; border: 1px solid #ccc !important; box-shadow: none !important;}
             .progress { border: 1px solid #ccc; background-color: #eee; }
-            .progress-bar { background: #000 !important; }
-            .progress-bar::after { color: #000; }
-            .timeline-item::before { border-color: #000; background-color: #fff; }
-            .section-title::after { background-color: #000; }
-            .text-primary-custom, .hero-subtitle, .project-tags span { color: #333 !important; }
+            .progress-bar { background: #6366f1 !important; }
+            .timeline-item::before { border-color: #6366f1; background-color: #fff; box-shadow: none; }
+            .project-icon { background: none; color: #6366f1; width: auto; height: auto; }
         }
     </style>
 </head>
 <body data-bs-spy="scroll" data-bs-target="#navbar" data-bs-offset="100" tabindex="0">
 
-    <!-- BARRA DE NAVEGACIÓN -->
-    <nav id="navbar" class="navbar navbar-expand-lg navbar-dark fixed-top">
+    <!-- BARRA DE NAVEGACIÓN (TEMA CLARO) -->
+    <nav id="navbar" class="navbar navbar-expand-lg navbar-light fixed-top">
         <div class="container">
             <a class="navbar-brand font-code fw-bold" href="#inicio">&lt;LC /&gt;</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -319,11 +403,11 @@
         <div class="container">
             <div class="row align-items-center flex-column-reverse flex-lg-row text-center text-lg-start">
                 <div class="col-lg-7 fade-in-up">
-                    <p class="font-code text-primary-custom mb-2">¡Hola, mundo! Soy</p>
-                    <h1 class="hero-title fw-bold mb-2">Laura Castañeda</h1>
+                    <p class="font-code text-primary-custom mb-2 fw-bold">¡Hola, mundo! Soy</p>
+                    <h1 class="hero-title fw-bold mb-3">Laura Castañeda</h1>
                     <h2 class="hero-subtitle">Desarrolladora de Software Full-Stack</h2>
-                    <p class="text-muted mb-4 fs-5" style="max-width: 500px;">
-                        Especializada en estructuración de lógica algorítmica, arquitectura de bases de datos relacionales y diseño de aplicaciones web eficientes.
+                    <p class="mb-4 fs-5" style="max-width: 550px; line-height: 1.8;">
+                        Especializada en estructuración de lógica algorítmica, arquitectura de bases de datos relacionales y diseño de aplicaciones web limpias y eficientes.
                     </p>
                     <div class="social-icons">
                         <a href="https://github.com/Laurita274" target="_blank" title="GitHub"><i class="fa-brands fa-github"></i></a>
@@ -331,10 +415,10 @@
                         <a href="mailto:correo.ejemplo@gmail.com" title="Correo"><i class="fa-solid fa-envelope"></i></a>
                     </div>
                 </div>
-                <div class="col-lg-5 mb-5 mb-lg-0 fade-in-up" style="transition-delay: 0.2s;">
+                <div class="col-lg-5 mb-5 mb-lg-0 fade-in-up text-center" style="transition-delay: 0.2s;">
                     <div class="profile-img-container">
-                        <!-- Marcador de posición. Cambia la URL por tu foto local ej: 'assets/perfil.jpg' -->
-                        <img src="https://ui-avatars.com/api/?name=Laura+Castañeda&background=38bdf8&color=0f172a&size=400&font-size=0.33" alt="Laura Castañeda" class="profile-img">
+                        <!-- Marcador de posición claro y pastel -->
+                        <img src="https://ui-avatars.com/api/?name=Laura+Castañeda&background=e0f2fe&color=6366f1&size=400&font-size=0.33" alt="Laura Castañeda" class="profile-img">
                     </div>
                 </div>
             </div>
@@ -342,26 +426,26 @@
     </section>
 
     <!-- PERFIL PROFESIONAL -->
-    <section id="perfil" class="bg-card">
+    <section id="perfil" class="bg-white-section">
         <div class="container fade-in-up">
             <div class="row">
                 <div class="col-lg-8">
                     <h2 class="section-title">Perfil Profesional</h2>
-                    <p class="fs-5 text-muted" style="line-height: 1.8;">
+                    <p class="fs-5" style="line-height: 1.8;">
                         Soy una aprendiz de la <strong>Tecnología en Análisis y Desarrollo de Software (ADSO)</strong> con gran capacidad para estructurar lógica algorítmica y diseñar arquitecturas de bases de datos. 
                     </p>
-                    <p class="fs-5 text-muted" style="line-height: 1.8;">
-                        Cuento con experiencia práctica en la creación de esquemas relacionales, procedimientos almacenados y triggers en SQL, así como en el desarrollo de aplicaciones web utilizando <strong>PHP, Python y Bootstrap</strong>. Mi objetivo es aportar mis conocimientos analíticos y mi enfoque metódico para construir plataformas digitales escalables y enfocadas en la usabilidad.
+                    <p class="fs-5" style="line-height: 1.8;">
+                        Cuento con experiencia práctica en la creación de esquemas relacionales, procedimientos almacenados y triggers en SQL, así como en el desarrollo de aplicaciones web utilizando <strong>PHP, Python y Bootstrap</strong>. Mi objetivo es aportar mis conocimientos analíticos y mi enfoque metódico para construir plataformas digitales escalables y con una excelente estética visual para el usuario.
                     </p>
                 </div>
                 <div class="col-lg-4 mt-5 mt-lg-0">
-                    <div class="p-4 rounded" style="background-color: var(--bg-dark); border: 1px solid var(--primary-color);">
-                        <h4 class="mb-4">Datos de Contacto</h4>
-                        <ul class="list-unstyled text-muted">
-                            <li class="mb-3"><i class="fa-solid fa-location-dot text-primary-custom me-3"></i> Medellín, Antioquia</li>
-                            <li class="mb-3"><i class="fa-solid fa-envelope text-primary-custom me-3"></i> correo.ejemplo@gmail.com</li>
-                            <li class="mb-3"><i class="fa-brands fa-github text-primary-custom me-3"></i> github.com/Laurita274</li>
-                            <li><i class="fa-solid fa-language text-primary-custom me-3"></i> Inglés Intermedio (B1)</li>
+                    <div class="contact-panel p-4">
+                        <h4 class="mb-4">Contacto & Detalles</h4>
+                        <ul class="list-unstyled">
+                            <li class="mb-3"><i class="fa-solid fa-location-dot text-primary-custom me-3 fs-5"></i> Medellín, Antioquia</li>
+                            <li class="mb-3"><i class="fa-solid fa-envelope text-primary-custom me-3 fs-5"></i> tu-correo@gmail.com</li>
+                            <li class="mb-3"><i class="fa-brands fa-github text-primary-custom me-3 fs-5"></i> github.com/Laurita274</li>
+                            <li><i class="fa-solid fa-language text-primary-custom me-3 fs-5"></i> Inglés Intermedio (B1)</li>
                         </ul>
                     </div>
                 </div>
@@ -377,25 +461,24 @@
                 
                 <!-- Backend & DB -->
                 <div class="col-md-6 fade-in-up">
-                    <h4 class="mb-4 font-code text-primary-custom"><i class="fa-solid fa-server me-2"></i>Backend & Bases de Datos</h4>
+                    <h4 class="mb-4 font-code text-primary-custom"><i class="fa-solid fa-server me-2"></i>Backend & Datos</h4>
                     
                     <div class="skill-box">
-                        <div class="skill-name"><i class="devicon-python-plain"></i> Python</div>
+                        <div class="skill-name"><i class="devicon-python-plain colored"></i> Python</div>
                         <div class="progress">
-                            <!-- El width se asigna por JS para la animación usando el data-percent -->
                             <div class="progress-bar" role="progressbar" data-percent="80%" style="width: 0%;"></div>
                         </div>
                     </div>
                     
                     <div class="skill-box">
-                        <div class="skill-name"><i class="devicon-php-plain"></i> PHP</div>
+                        <div class="skill-name"><i class="devicon-php-plain colored"></i> PHP</div>
                         <div class="progress">
                             <div class="progress-bar" role="progressbar" data-percent="85%" style="width: 0%;"></div>
                         </div>
                     </div>
 
                     <div class="skill-box">
-                        <div class="skill-name"><i class="devicon-mysql-plain"></i> SQL / MySQL / PostgreSQL</div>
+                        <div class="skill-name"><i class="devicon-mysql-plain colored"></i> SQL / MySQL / PostgreSQL</div>
                         <div class="progress">
                             <div class="progress-bar" role="progressbar" data-percent="90%" style="width: 0%;"></div>
                         </div>
@@ -404,24 +487,24 @@
 
                 <!-- Frontend & Herramientas -->
                 <div class="col-md-6 fade-in-up" style="transition-delay: 0.2s;">
-                    <h4 class="mb-4 font-code text-primary-custom"><i class="fa-solid fa-laptop-code me-2"></i>Frontend & Herramientas</h4>
+                    <h4 class="mb-4 font-code text-primary-custom"><i class="fa-solid fa-laptop-code me-2"></i>Frontend & Entorno</h4>
                     
                     <div class="skill-box">
-                        <div class="skill-name"><i class="devicon-html5-plain"></i> HTML5 & CSS3</div>
+                        <div class="skill-name"><i class="devicon-html5-plain colored"></i> HTML5 & CSS3</div>
                         <div class="progress">
                             <div class="progress-bar" role="progressbar" data-percent="90%" style="width: 0%;"></div>
                         </div>
                     </div>
 
                     <div class="skill-box">
-                        <div class="skill-name"><i class="devicon-bootstrap-plain"></i> Bootstrap</div>
+                        <div class="skill-name"><i class="devicon-bootstrap-plain colored"></i> Bootstrap</div>
                         <div class="progress">
                             <div class="progress-bar" role="progressbar" data-percent="85%" style="width: 0%;"></div>
                         </div>
                     </div>
 
                     <div class="skill-box">
-                        <div class="skill-name"><i class="devicon-git-plain"></i> Git & GitHub</div>
+                        <div class="skill-name"><i class="devicon-git-plain colored"></i> Git & GitHub</div>
                         <div class="progress">
                             <div class="progress-bar" role="progressbar" data-percent="80%" style="width: 0%;"></div>
                         </div>
@@ -433,7 +516,7 @@
     </section>
 
     <!-- PROYECTOS DESTACADOS -->
-    <section id="proyectos" class="bg-card">
+    <section id="proyectos" class="bg-white-section">
         <div class="container">
             <h2 class="section-title fade-in-up">Proyectos Destacados</h2>
             
@@ -450,9 +533,9 @@
                 <!-- Proyecto 1 -->
                 <div class="col-lg-4 col-md-6 project-item fade-in-up" data-category="fullstack">
                     <div class="project-card">
-                        <i class="fa-solid fa-shop project-icon"></i>
+                        <div class="project-icon"><i class="fa-solid fa-shop"></i></div>
                         <h4>OneStyle</h4>
-                        <p class="text-muted">Plataforma E-commerce de moda. Catálogo digital y panel administrativo con arquitectura de base de datos relacional robusta para gestión de inventario y pedidos.</p>
+                        <p>Plataforma E-commerce de moda. Catálogo digital y panel administrativo con arquitectura de base de datos relacional robusta para gestión de inventario y pedidos.</p>
                         <div class="project-tags mb-4">
                             <span>PHP</span> <span>SQL</span> <span>PlantUML</span> <span>Full-Stack</span>
                         </div>
@@ -463,9 +546,9 @@
                 <!-- Proyecto 2 -->
                 <div class="col-lg-4 col-md-6 project-item fade-in-up" data-category="frontend">
                     <div class="project-card">
-                        <i class="fa-solid fa-screwdriver-wrench project-icon"></i>
+                        <div class="project-icon" style="background-color: #fce7f3; color: #f472b6;"><i class="fa-solid fa-screwdriver-wrench"></i></div>
                         <h4>FixNow</h4>
-                        <p class="text-muted">Marketplace de reparaciones. Plataforma web diseñada para conectar proveedores de servicios técnicos con usuarios en Medellín. Interfaces de registro seguras y DOFA.</p>
+                        <p>Marketplace de reparaciones. Plataforma web diseñada para conectar proveedores de servicios técnicos con usuarios en Medellín. Interfaces de registro seguras y DOFA.</p>
                         <div class="project-tags mb-4">
                             <span>HTML5</span> <span>CSS3</span> <span>Bootstrap</span> <span>Análisis</span>
                         </div>
@@ -476,9 +559,9 @@
                 <!-- Proyecto 3 -->
                 <div class="col-lg-4 col-md-6 project-item fade-in-up" data-category="python">
                     <div class="project-card">
-                        <i class="fa-solid fa-clock-rotate-left project-icon"></i>
+                        <div class="project-icon" style="background-color: #f3e8ff; color: #a855f7;"><i class="fa-solid fa-clock-rotate-left"></i></div>
                         <h4>Sistema Reserva Turnos</h4>
-                        <p class="text-muted">App web de automatización desarrollada para entornos institucionales, enfocada en optimizar el uso de microondas del SENA CTGI mediante asignación lógica.</p>
+                        <p>App web de automatización desarrollada para entornos institucionales, enfocada en optimizar el uso de microondas del SENA CTGI mediante asignación lógica.</p>
                         <div class="project-tags mb-4">
                             <span>Python</span> <span>SQL</span> <span>PSeInt</span>
                         </div>
@@ -502,14 +585,14 @@
                         <div class="timeline-item">
                             <span class="timeline-date">Actualidad</span>
                             <h4 class="mb-1">Tecnología en Análisis y Desarrollo de Software (ADSO)</h4>
-                            <h6 class="text-primary-custom mb-3">SENA - Centro Textil y de Gestión Industrial (CTGI)</h6>
-                            <p class="text-muted">
+                            <h6 class="text-primary-custom mb-3 mt-2">SENA - Centro Textil y de Gestión Industrial (CTGI)</h6>
+                            <p class="fs-6">
                                 Programa de formación profesional integral. Experiencia práctica en:
                             </p>
-                            <ul class="text-muted">
-                                <li>Desarrollo de algoritmos lógicos estructurados en PSeInt.</li>
-                                <li>Diagramación conceptual (UML/BPMN) e historias de usuario.</li>
-                                <li>Diseño, normalización y construcción de bases de datos relacionales con procedimientos almacenados y triggers.</li>
+                            <ul>
+                                <li class="mb-2">Desarrollo de algoritmos lógicos estructurados en PSeInt.</li>
+                                <li class="mb-2">Diagramación conceptual (UML/BPMN) e historias de usuario.</li>
+                                <li class="mb-2">Diseño, normalización y construcción de bases de datos relacionales con procedimientos almacenados y triggers.</li>
                                 <li>Desarrollo de proyectos colaborativos en entornos ágiles utilizando Git/GitHub.</li>
                             </ul>
                         </div>
@@ -521,9 +604,9 @@
     </section>
 
     <!-- FOOTER -->
-    <footer class="bg-card text-center py-4" style="border-top: 1px solid var(--bg-dark);">
+    <footer class="bg-white-section text-center py-4" style="border-top: 1px solid var(--border-color);">
         <div class="container">
-            <p class="mb-0 text-muted">&copy; <span id="year"></span> Laura Castañeda. Creado con <i class="fa-brands fa-html5 text-primary-custom mx-1"></i> y mucha lógica.</p>
+            <p class="mb-0 fw-medium">&copy; <span id="year"></span> Laura Castañeda. Creado con <i class="fa-brands fa-html5 text-primary-custom mx-1"></i> y código limpio.</p>
         </div>
     </footer>
 
@@ -565,7 +648,6 @@
                     projectItems.forEach(item => {
                         if (filterValue === 'all' || item.getAttribute('data-category') === filterValue) {
                             item.style.display = 'block';
-                            // Pequeño timeout para animar la entrada
                             setTimeout(() => { item.style.opacity = '1'; item.style.transform = 'scale(1)'; }, 50);
                         } else {
                             item.style.opacity = '0';
@@ -577,34 +659,28 @@
             });
 
             // 4. Animaciones al hacer Scroll (Intersection Observer)
-            // Se encarga de hacer aparecer los elementos (Fade-in) y de llenar las barras de progreso
-            const observerOptions = {
-                threshold: 0.2 // Se activa cuando el 20% del elemento es visible
-            };
+            const observerOptions = { threshold: 0.2 };
 
             const scrollObserver = new IntersectionObserver((entries, observer) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         
-                        // Añadir clase para hacer visible el elemento
                         if(entry.target.classList.contains('fade-in-up')) {
                             entry.target.classList.add('visible');
                         }
 
-                        // Animar las barras de progreso si entran en pantalla
+                        // Animar las barras de progreso
                         const progressBars = entry.target.querySelectorAll('.progress-bar');
                         progressBars.forEach(bar => {
                             const targetWidth = bar.getAttribute('data-percent');
                             bar.style.width = targetWidth;
                         });
 
-                        // Dejar de observar el elemento una vez animado
                         observer.unobserve(entry.target);
                     }
                 });
             }, observerOptions);
 
-            // Observar todos los elementos con la clase fade-in-up y las cajas de habilidades
             document.querySelectorAll('.fade-in-up, .skill-box').forEach(el => {
                 scrollObserver.observe(el);
             });
